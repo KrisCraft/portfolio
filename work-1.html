@@ -97,12 +97,105 @@
     .reflection-body p { margin: 0; }
     .reflection-body p + p { margin-top: 18px; }
     .reflection-body em { color: var(--foreground); font-style: normal; font-weight: 600; }
+
+    /* ── Information Architecture ── */
+    .ia-section-label {
+      font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--muted-foreground); font-weight: 700; margin-bottom: 16px;
+    }
+    .ia-flow {
+      display: grid; grid-template-columns: repeat(5, 1fr);
+      gap: 12px; margin-top: 16px; align-items: stretch;
+      position: relative;
+    }
+    @media (max-width: 760px) { .ia-flow { grid-template-columns: 1fr; gap: 14px; } }
+    .ia-flow-step {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 16px 14px;
+      position: relative;
+    }
+    .ia-flow-step .n {
+      font-size: 11px; font-weight: 700; color: var(--accent);
+      letter-spacing: 0.08em; font-variant-numeric: tabular-nums;
+    }
+    .ia-flow-step .h { font-size: 14px; font-weight: 650; margin-top: 4px; letter-spacing: -0.005em; }
+    .ia-flow-step .d { font-size: 12px; color: var(--muted-foreground); margin-top: 2px; line-height: 1.45; }
+    .ia-flow-step + .ia-flow-step::before {
+      content: "›"; position: absolute; left: -10px; top: 50%;
+      transform: translateY(-50%); color: var(--muted-foreground);
+      font-size: 18px; font-weight: 600; line-height: 1;
+    }
+    @media (max-width: 760px) {
+      .ia-flow-step + .ia-flow-step::before {
+        content: "↓"; left: 50%; top: -12px;
+        transform: translateX(-50%);
+      }
+    }
+    .ia-modules {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px;
+      margin-top: 16px;
+    }
+    @media (max-width: 1000px) { .ia-modules { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 540px)  { .ia-modules { grid-template-columns: 1fr; } }
+    .ia-module {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius-xl); padding: 22px 20px;
+      transition: border-color 200ms;
+    }
+    .ia-module:hover { border-color: color-mix(in oklab, var(--accent) 35%, var(--border)); }
+    .ia-module .h { font-size: 16px; font-weight: 700; letter-spacing: -0.005em; }
+    .ia-module .en {
+      font-size: 11px; color: var(--accent); font-weight: 700;
+      letter-spacing: 0.08em; text-transform: uppercase; margin-top: 2px;
+    }
+    .ia-module .role {
+      margin: 12px 0 14px; padding: 4px 10px;
+      display: inline-block; border-radius: 999px;
+      background: var(--muted); border: 1px solid var(--border);
+      font-size: 11px; color: var(--muted-foreground); font-weight: 600;
+      letter-spacing: 0.04em;
+    }
+    .ia-module ul { margin: 0; padding: 0; list-style: none; }
+    .ia-module li {
+      font-size: 12.5px; line-height: 1.55; color: var(--foreground);
+      padding: 6px 0 6px 14px; position: relative;
+      border-top: 1px dashed var(--border);
+    }
+    .ia-module li:first-child { border-top: none; padding-top: 0; }
+    .ia-module li::before {
+      content: ""; position: absolute; left: 0; top: 12px;
+      width: 6px; height: 6px; border-radius: 50%; background: var(--accent);
+    }
+    .ia-module li:first-child::before { top: 6px; }
+    .ia-admin {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;
+      margin-top: 16px;
+    }
+    @media (max-width: 1000px) { .ia-admin { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 600px)  { .ia-admin { grid-template-columns: 1fr; } }
+    .ia-admin-card {
+      background: var(--surface);
+      border: 1px solid color-mix(in oklab, var(--foreground) 14%, var(--border));
+      border-radius: var(--radius-xl); padding: 18px 20px;
+      display: flex; gap: 18px; align-items: flex-start;
+    }
+    .ia-admin-card .h {
+      flex: 0 0 auto; font-size: 13px; font-weight: 700;
+      letter-spacing: -0.005em; padding-top: 1px;
+      min-width: 110px;
+    }
+    .ia-admin-card .d {
+      flex: 1 1 auto; font-size: 13px; color: var(--muted-foreground);
+      line-height: 1.55;
+    }
   </style>
 </head>
 <body>
   <div id="root"></div>
 
   <script src="content.js"></script>
+  <script src="image-protection.js"></script>
+  <script src="lightbox.js"></script>
   <script type="text/babel" src="components/HeroUI.jsx"></script>
   <script type="text/babel" src="components/Sections.jsx"></script>
 
@@ -126,7 +219,7 @@
           p1: "Edge PQM 是台達電子智慧製造堆疊的核心應用之一，目標是讓工廠產線在<em>同一個畫面上即時掌握產線狀態</em>——不用在三個系統之間切換，不用等班組長回報，不用憑感覺判斷哪裡出了問題。",
           p2: "在這個專案裡，我的職責橫跨兩個階段：初期以 <em>UX Designer</em> 的身份重構整個資訊架構與設計系統；後期轉為 <em>Product Owner</em>，負責與多個內部組織對齊指標定義、釐清產品邊界、推動跨廠區導入。",
           challenge_title: "核心挑戰",
-          challenge: "資料來自 CFX 設備事件、MES 工單系統、EDMS 設備資訊、Edge TMM 品質模組——多個資料源、多個組織定義的指標，要統一進一個可配置的看板，還要讓站在螢幕前的用戶幾秒就能讀懂。"
+          challenge: "資料來自 CFX 設備事件、MES 工單系統、EDMS 設備資訊、SPC 品質模組——等多個資料源、多個組織定義的指標，要統一進一個可配置的看板，還要讓站在螢幕前的用戶幾秒就能讀懂。"
         },
         s2: {
           num: "02",
@@ -163,7 +256,7 @@
             {
               idx: "決策 02",
               title: "指標溯源卡 — 讓每個數字可以被驗証",
-              body: "每個 widget 附完整的指標溯源卡，記錄指標定義、計算公式、資料來源、更新頻率，由各組織共同審核。這不只是 UI 設計，而是讓多個組織的共識變成可見的產品層。"
+              body: "每個 KPI 指標附上定義、計算公式、資料來源、更新頻率，由各組織共同審核取得共識。這不只是 UI 設計，而是讓多個組織的共識變成可見的產品層。"
             },
             {
               idx: "決策 03",
@@ -177,16 +270,81 @@
             }
           ]
         },
-        s4: {
+        s_ia: {
           num: "04",
+          title: "資訊架構 — 從多源資料到角色看板",
+          p1: "Edge PQM 把<em>多個資料源</em>（CFX 設備事件 / MES 工單 / EDMS 設備資訊 / SPC 品質模組）匯聚成一個平台，再 fan-out 到<em>四個標準看板 + 一個自訂看板</em>，每張對應一種角色的日常。背後共用一套 widget 化的部件中心，讓資料基礎設施只開發一次，使用情境可以自由組合。",
+          flow_label: "資料主軸",
+          flow: [
+            { n: "01", h: "多源資料",   d: "CFX / MES / EDMS / SPC" },
+            { n: "02", h: "平台整合",   d: "清洗 / 對齊 / 計算指標" },
+            { n: "03", h: "部件中心",   d: "P / Q / M 三類 widget" },
+            { n: "04", h: "看板組合",   d: "4 標準 + N 個自訂" },
+            { n: "05", h: "角色解讀",   d: "廠長 / 工程師 / 品保" }
+          ],
+          modules_label: "四個標準看板",
+          modules: [
+            {
+              h: "產線生產看板",
+              en: "Production Dashboard",
+              role: "高層主管 / 廠長 / 客戶",
+              pages: [
+                "全廠稼動率 / 直通率",
+                "UPH / OEE 即時數字",
+                "整線瓶頸站分析 + 標工達成率",
+              ]
+            },
+            {
+              h: "指標看板",
+              en: "Metrics Dashboard",
+              role: "產線作業員 / 班組長",
+              pages: [
+                "UPH / OEE / 稼動率 大數字",
+                "閾值觸發即時警示",
+                "支援大螢幕視覺化",
+                "供決策層快速掃讀"
+              ]
+            },
+            {
+              h: "設備狀態看板",
+              en: "Equipment Dashboard",
+              role: "製程 / 設備工程師",
+              pages: [
+                "ATT / CT 即時趨勢圖",
+                "停機歷史 + Error Code 排行",
+                "秒級更新"
+              ]
+            },
+            {
+              h: "品質分析看板",
+              en: "Quality Dashboard",
+              role: "品質工程師",
+              pages: [
+                "良率/直通率分析",
+                "瑕疵類型分布",
+                "品質異常追蹤",
+                "整合 SPC 模組監控 KPIV/OV"
+              ]
+            }
+          ],
+          admin_label: "支撐模組",
+          admin: [
+            { h: "部件中心 + 自訂看板", d: "從 P（生產）/ Q（品質）/ M（設備）三類 widget 自由挑選，拖拉組合成專屬看板，覆蓋固定看板無法窮舉的長尾需求" },
+            { h: "指標溯源卡", d: "每個 KPI 指標附上定義 / 公式 / 資料來源 / 更新頻率，由各組織共同審核取得共識——讓全球治理可標準化，數字讓高層相信" },
+            { h: "KPI 閾值設定", d: "每個關鍵指標（UPH / OEE / 稼動率 / FPY 等）的警示閾值由使用者依產線特性自設。觸發時看板立即變色——站在大螢幕前的人不用讀到具體數字，注意顏色就可以立刻採取行動" }
+          ]
+        },
+        s4: {
+          num: "05",
           title: "視覺與設計系統",
-          p1: "工廠環境的螢幕多樣——控制室的大型顯示器、工程師桌面的 24 吋螢幕、現場產線上的監控面板，甚至深夜輪班時燈光昏暗的車間。我設計了<em>深色 / 淺色雙主題</em>，並把設計 token 系統化，讓工程團隊能在不同環境下一鍵切換。",
-          p2: "同時支援<em>四語 i18n</em>（繁體中文 / 簡體中文 / English / ไทย），因為台達的工廠遍布亞洲，操作人員的母語各不相同。這套多語系工作流由 <em>AI Agent 全程協作</em>建立——從 i18n key 值的命名規範、翻譯初稿生成，到四個語系的語意一致性審查，全部透過 Agent 自動化完成。這是我將 AI 工作流落地到真實產品交付的第一個完整實踐。"
+          p1: "工廠環境的螢幕多樣——戰情室的大型顯示器、工程師桌面的 24 吋螢幕、現場產線上的監控面板，甚至深夜輪班時燈光昏暗的車間。因此我設計了<em>深色 / 淺色雙主題</em>，且在全螢幕狀態將看板所有元素自動放大，以利於實際監控情境，並把所有設計 token 系統化，讓工程團隊能在不同環境下一鍵切換 UI 模式。",
+          p2: "同時支援<em>四語 i18n</em>（繁體中文 / 簡體中文 / English / ไทย），因為台達的工廠遍布亞洲，操作人員的母語各不相同。這套多語系工作流由 <em>AI Agent 全程協作</em>建立——從 i18n key 值的命名規範、翻譯初稿生成，到四個語系的語意一致性審查，全部透過 Agent 自動化完成。",
+          p3: "這是我將 <em>AI 工作流落地到真實產品交付</em>的第一個完整實踐——也是我從「會用 AI 工具的設計師」走向「能設計 AI 工作流的產品擁有者」。"
         },
         s5: {
-          num: "05",
+          num: "06",
           title: "成果與反思",
-          p1: "Edge PQM 完成跨國規模化導入，覆蓋台灣、中國、泰國三地廠區，現已成為台達生產製造應用的核心系統之一。",
+          p1: "Edge PQM 完成跨國規模化導入，覆蓋台灣、中國、泰國三地廠區，現已成為台達生產製造應用的核心系統之一，背後其實解決的是「全球擴產率一致性」的挑戰。調校好的最佳生產參數與品質邏輯，可以快速複製到世界各廠，大幅縮短新廠的開線爬坡期，這種「產線複製(Copy Exact)」的過程，本質上是 「製造經驗的軟體化與資產化」。",
           outcomes: [
             { n: "500+", l: "條產線成功導入\n台灣・中國・泰國" },
             { n: "3", l: "種製造領域\nSMT・電子組裝・塑膠射出" },
@@ -213,7 +371,7 @@
           p1: "Edge PQM (Production Quality Management) is a core application in Delta Electronics' smart manufacturing stack. The goal: let factory Line Managers monitor production status <em>in a single view</em> — no switching between three systems, no waiting for shift reports, no guesswork.",
           p2: "My role spanned two phases: first as <em>UX Designer</em>, restructuring the entire information architecture and design system; then as <em>Product Owner</em>, aligning metric definitions across multiple internal organizations and driving multi-site deployment.",
           challenge_title: "The Core Challenge",
-          challenge: "Data flows from CFX equipment events, MES work orders, EDMS device info, and Edge TMM quality modules — four sources, metrics defined by multiple organizations, all needing to land in one configurable dashboard that operators can read in seconds while standing."
+          challenge: "Data flows from CFX equipment events, MES work orders, EDMS device info, and the SPC quality module — multiple sources with metrics defined by different organizations, all needing to land in one configurable dashboard operators can read in seconds while standing."
         },
         s2: {
           num: "02",
@@ -250,7 +408,7 @@
             {
               idx: "Decision 02",
               title: "Metric Provenance Card — making every number verifiable",
-              body: "Every widget carries a Metric Provenance Card with the definition, formula, data source, and update frequency — reviewed and approved by each contributing organization (P7, AIOT, MQA, T1, etc.). Not just UI polish; this is organizational governance made visible."
+              body: "Every KPI carries its definition, formula, data source, and update frequency — reviewed and approved by each contributing organization to reach consensus. Not just UI polish; this is multi-organizational alignment made visible as a product layer."
             },
             {
               idx: "Decision 03",
@@ -264,16 +422,81 @@
             }
           ]
         },
-        s4: {
+        s_ia: {
           num: "04",
+          title: "Information Architecture — From multi-source data to role dashboards",
+          p1: "Edge PQM aggregates <em>multiple data sources</em> (CFX equipment events / MES work orders / EDMS device info / SPC quality module) into one platform, then fans out to <em>four standard dashboards + one custom dashboard</em>, each mapping to a role's daily work. Underneath sits a widget-based <em>Widget Center</em>: build the data infrastructure once, compose use cases freely.",
+          flow_label: "Data Spine",
+          flow: [
+            { n: "01", h: "Multi-source",   d: "CFX / MES / EDMS / SPC" },
+            { n: "02", h: "Platform",       d: "Cleanse / align / compute" },
+            { n: "03", h: "Widget Center",  d: "P / Q / M categories" },
+            { n: "04", h: "Dashboards",     d: "4 standard + N custom" },
+            { n: "05", h: "Roles",          d: "Manager / Engineer / QA" }
+          ],
+          modules_label: "Four Standard Dashboards",
+          modules: [
+            {
+              h: "Production Dashboard",
+              en: "產線生產看板",
+              role: "Executive / Plant Manager / Customer",
+              pages: [
+                "Plant-wide utilization / yield rate",
+                "UPH / OEE live numbers",
+                "Bottleneck-station analysis + standard-time achievement"
+              ]
+            },
+            {
+              h: "Metrics Dashboard",
+              en: "指標看板",
+              role: "Line Operator / Shift Lead",
+              pages: [
+                "Large UPH / OEE / Utilization KPIs",
+                "Threshold-triggered real-time alerts",
+                "Optimized for big-screen viewing",
+                "Fast-scan for decision makers"
+              ]
+            },
+            {
+              h: "Equipment Dashboard",
+              en: "設備狀態看板",
+              role: "Process / Equipment Engineer",
+              pages: [
+                "ATT / CT real-time trends",
+                "Downtime history + Error Code ranking",
+                "Sub-minute refresh"
+              ]
+            },
+            {
+              h: "Quality Dashboard",
+              en: "品質分析看板",
+              role: "Quality Engineer",
+              pages: [
+                "Yield / Throughput-rate analysis",
+                "Defect-type distribution",
+                "Quality anomaly tracking",
+                "Integrated with SPC module — KPIV / OV monitoring"
+              ]
+            }
+          ],
+          admin_label: "Support Modules",
+          admin: [
+            { h: "Widget Center + Custom", d: "Freely pick from P (Production) / Q (Quality) / M (Machine) widget categories, drag and compose into a custom dashboard — covering long-tail use cases the fixed dashboards can't enumerate" },
+            { h: "Metric Provenance Card", d: "Every KPI carries definition / formula / data source / update frequency, reviewed across organizations — making global governance standardizable, so executives can trust the numbers" },
+            { h: "KPI Threshold Settings", d: "Every key metric (UPH / OEE / Utilization / FPY, etc.) carries a configurable red / orange threshold tuned to the line's characteristics. When a number breaks a threshold, the indicator turns color instantly — operators don't read numbers, they read the colors" }
+          ]
+        },
+        s4: {
+          num: "05",
           title: "Visual & Design System",
-          p1: "Factory screens are diverse — large displays in control rooms, 24\" engineer monitors, HMI touchscreens on the floor, and dimly lit night shifts. I built a <em>light / dark dual theme</em> with a tokenized design system so the engineering team could switch environments with a single toggle.",
-          p2: "The system supports <em>four languages</em> (Traditional Chinese, Simplified Chinese, English, Thai) — because Delta's factories span Asia and operators work in their native tongue. The entire i18n workflow was built with <em>AI Agent collaboration</em>: key naming conventions, translation drafts, and semantic consistency review across all four locales were automated end-to-end. This was my first full deployment of an AI-powered workflow in a live product."
+          p1: "Factory screens are diverse — large displays in war rooms, 24\" engineer monitors, HMI touchscreens on the floor, and dimly lit night shifts. So I built a <em>light / dark dual theme</em> that auto-enlarges every dashboard element when entering full-screen mode (matching real monitoring scenarios), with the entire design-token system unified so the engineering team can switch UI modes with a single toggle.",
+          p2: "The system supports <em>four languages</em> (Traditional Chinese, Simplified Chinese, English, Thai) — because Delta's factories span Asia and operators work in their native tongue. The entire i18n workflow was built with <em>AI Agent collaboration</em>: key naming conventions, translation drafts, and semantic consistency review across all four locales were automated end-to-end.",
+          p3: "This was my first full deployment of an <em>AI-powered workflow in a live product</em> — and the move from 'a designer who uses AI tools' to 'a product owner who designs AI workflows'."
         },
         s5: {
-          num: "05",
+          num: "06",
           title: "Outcome & Reflection",
-          p1: "Edge PQM scaled to a multi-country rollout across Taiwan, China, and Thailand, becoming the core sub-application of Delta's Line Manager family.",
+          p1: "Edge PQM scaled to a multi-country rollout across Taiwan, China, and Thailand, becoming a core system in Delta's manufacturing application stack. What it really solved underneath was the challenge of <em>global ramp-up consistency</em>: tuned best-practice parameters and quality logic can be replicated to plants worldwide, dramatically shortening the new-line ramp-up curve. This kind of \"Copy Exact\" production-line replication is, at its core, the <em>softwarization and asset-ization of manufacturing know-how</em>.",
           outcomes: [
             { n: "500+", l: "Production lines deployed\nTaiwan・China・Thailand" },
             { n: "3", l: "Manufacturing domains\nSMT・Electronics Assembly・Plastic Injection" },
@@ -424,13 +647,70 @@
             </div>
           </section>
 
-          {/* ── 04 視覺設計 ── */}
+          {/* ── 04 資訊架構 — Information Architecture ── */}
+          <section className="cs-section">
+            <div className="container" style={{ maxWidth: 1100 }}>
+              <div className="cs-num">{c.s_ia.num} / {c.s_ia.title}</div>
+              <h2 className="cs-h2">{c.s_ia.title}</h2>
+              <p className="cs-body" dangerouslySetInnerHTML={{ __html: c.s_ia.p1 }} />
+
+              <div style={{ marginTop: 48 }}>
+                <div className="ia-section-label">{c.s_ia.flow_label}</div>
+                <div className="ia-flow">
+                  {c.s_ia.flow.map((s, i) => (
+                    <div className="ia-flow-step" key={i}>
+                      <div className="n">{s.n}</div>
+                      <div className="h">{s.h}</div>
+                      <div className="d">{s.d}</div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <div style={{ marginTop: 48 }}>
+                <div className="ia-section-label">{c.s_ia.modules_label}</div>
+                <div className="ia-modules">
+                  {c.s_ia.modules.map((m, i) => (
+                    <div className="ia-module" key={i}>
+                      <div className="h">{m.h}</div>
+                      <div className="en">{m.en}</div>
+                      <div className="role">{m.role}</div>
+                      <ul>{m.pages.map((p, j) => <li key={j}>{p}</li>)}</ul>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <div style={{ marginTop: 48 }}>
+                <div className="ia-section-label">{c.s_ia.admin_label}</div>
+                <div className="ia-admin">
+                  {c.s_ia.admin.map((a, i) => (
+                    <div className="ia-admin-card" key={i}>
+                      <div className="h">{a.h}</div>
+                      <div className="d">{a.d}</div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </section>
+
+          {/* ── 05 視覺設計 ── */}
           <section className="cs-section" style={{ background: "var(--tint)" }}>
             <div className="container" style={{ maxWidth: 1100 }}>
               <div className="cs-num">{c.s4.num} / {c.s4.title}</div>
               <h2 className="cs-h2">{c.s4.title}</h2>
               <p className="cs-body" dangerouslySetInnerHTML={{ __html: c.s4.p1 }} />
               <p className="cs-body" style={{ marginTop: 16 }} dangerouslySetInnerHTML={{ __html: c.s4.p2 }} />
+              {c.s4.p3 && (
+                <p className="cs-body" style={{
+                  marginTop: 20, padding: "16px 22px",
+                  background: "var(--accent-soft)",
+                  borderLeft: "3px solid var(--accent)",
+                  borderRadius: "var(--radius)",
+                  color: "var(--foreground)"
+                }} dangerouslySetInnerHTML={{ __html: c.s4.p3 }} />
+              )}
               <div style={{ marginTop: 40, display: "grid", gridTemplateColumns: "1fr 1fr", gap: 24 }}>
                 <div>
                   <img src={img('cover', 'light')} alt="Light 主題" className="cs-img" />
@@ -448,7 +728,7 @@
             </div>
           </section>
 
-          {/* ── 05 成果與反思 ── */}
+          {/* ── 06 成果與反思 ── */}
           <section className="cs-section">
             <div className="container" style={{ maxWidth: 1100 }}>
               <div className="cs-num">{c.s5.num} / {c.s5.title}</div>

@@ -113,10 +113,10 @@ window.PORTFOLIO_CONTENT = {
           tags: ["Product Owner", "Design System"]
         },
         {
-          year: "2022",
-          title: "作品 03 · 即將揭曉",
-          desc: "從 0 到 1 的設計探索與驗證。",
-          tags: ["Research", "Prototype"]
+          year: "2023 — 2024",
+          title: "AOI · Auto Defect Judgement",
+          desc: "把資料科學家才能操作的 AI 模型訓練流程，變成現場製程工程師能上手的瑕疵覆判系統。",
+          tags: ["UX Design", "AI / MLOps", "ADC", "AOI"]
         }
       ],
       placeholder: "Case study coming soon"
@@ -283,10 +283,10 @@ window.PORTFOLIO_CONTENT = {
           tags: ["Product Owner", "Design System"]
         },
         {
-          year: "2022",
-          title: "Case 03 · Coming Soon",
-          desc: "A 0-to-1 design exploration and validation.",
-          tags: ["Research", "Prototype"]
+          year: "2023 — 2024",
+          title: "AOI · Auto Defect Judgement",
+          desc: "Turning an AI model-training workflow only data scientists could run — into a defect re-judgement system shop-floor engineers can operate themselves.",
+          tags: ["UX Design", "AI / MLOps", "ADC", "AOI"]
         }
       ],
       placeholder: "Case study coming soon"
