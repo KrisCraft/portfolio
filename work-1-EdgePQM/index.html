@@ -4,9 +4,9 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Edge PQM — Kris Lu</title>
-  <link rel="stylesheet" href="styles/heroui-tokens.css" />
-  <link rel="stylesheet" href="styles/heroui-kit.css" />
-  <link rel="stylesheet" href="styles/portfolio.css" />
+  <link rel="stylesheet" href="../styles/heroui-tokens.css" />
+  <link rel="stylesheet" href="../styles/heroui-kit.css" />
+  <link rel="stylesheet" href="../styles/portfolio.css" />
 
   <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
   <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
@@ -208,11 +208,20 @@
 <body>
   <div id="root"></div>
 
-  <script src="content.js"></script>
-  <script src="image-protection.js"></script>
-  <script src="lightbox.js"></script>
-  <script type="text/babel" src="components/HeroUI.jsx"></script>
-  <script type="text/babel" src="components/Sections.jsx"></script>
+  <script>
+    window.PORTFOLIO_PATHS = {
+      assets: "../",
+      home: "../home/",
+      works: ["../work-1-EdgePQM/", "../work-2-PVS/", "../work-3-ADJ/"]
+    };
+  </script>
+
+
+  <script src="../content.js"></script>
+  <script src="../image-protection.js"></script>
+  <script src="../lightbox.js"></script>
+  <script type="text/babel" src="../components/HeroUI.jsx"></script>
+  <script type="text/babel" src="../components/Sections.jsx"></script>
 
   <script type="text/babel">
     const { useState, useEffect } = React;
@@ -554,7 +563,7 @@
       const [theme, setTheme] = useState(() => localStorage.getItem("kl-theme") || "light");
       const t = window.PORTFOLIO_CONTENT[lang];
       const c = C[lang];
-      const img = (base, fixedTheme) => `uploads/edge-pqm/${base}-${lang}-${fixedTheme || theme}.png`;
+      const img = (base, fixedTheme) => `${window.PORTFOLIO_PATHS.assets}uploads/edge-pqm/${base}-${lang}-${fixedTheme || theme}.png`;
 
       useEffect(() => {
         document.documentElement.classList.toggle("dark", theme === "dark");
@@ -571,7 +580,7 @@
           {/* ── Hero ── */}
           <section className="detail-hero">
             <div className="container">
-              <a href="index.html" className="back-link">{t.detail.back}</a>
+              <a href="../home/" className="back-link">{t.detail.back}</a>
               <div style={{ display: "flex", gap: 8, flexWrap: "wrap", marginBottom: 16 }}>
                 {c.tags.map((tg, i) => <span className="tag" key={i}>{tg}</span>)}
               </div>
@@ -793,10 +802,10 @@
           {/* ── Prev / Next ── */}
           <section style={{ borderTop: "1px solid var(--border)", padding: "48px 0" }}>
             <div className="container" style={{ display: "flex", justifyContent: "space-between", gap: 16, flexWrap: "wrap" }}>
-              <a href="index.html#works" className="button button--outline">
+              <a href="../home/#works" className="button button--outline">
                 {lang === "zh" ? "← 返回作品列表" : "← All Works"}
               </a>
-              <a href="work-2.html" className="button button--outline">
+              <a href="../work-2-PVS/" className="button button--outline">
                 {lang === "zh" ? "下一個作品 →" : "Next Case →"}
               </a>
             </div>

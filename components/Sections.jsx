@@ -1,5 +1,9 @@
 // Portfolio sections — React components
 const { useState, useEffect, useRef, useCallback } = React;
+const PORTFOLIO_PATHS = window.PORTFOLIO_PATHS || {};
+const HOME_URL = PORTFOLIO_PATHS.home || "home/";
+const WORK_URLS = PORTFOLIO_PATHS.works || ["work-1-EdgePQM/", "work-2-PVS/", "work-3-ADJ/"];
+const ASSET_BASE = PORTFOLIO_PATHS.assets || "";
 
 // ---------- Mini icons ----------
 const PIcon = ({ d, size = 16, strokeWidth = 1.75 }) => (
@@ -39,7 +43,7 @@ function Nav({ lang, setLang, theme, setTheme, t, currentPage = "home" }) {
   ];
   return (
     <nav className="nav" data-scrolled={scrolled}>
-      <a href="index.html" className="nav-brand">
+      <a href={HOME_URL} className="nav-brand">
         <span className="dot"></span>
         Kris Lu
       </a>
@@ -121,7 +125,7 @@ function About({ t }) {
         <div className="about-grid">
           <div className="about-portrait">
             <div className="about-portrait-inner">
-              <img src="uploads/kris-portrait.png" alt="Kris Lu" style={{ width: "100%", height: "100%", objectFit: "contain", objectPosition: "bottom" }} />
+              <img src={`${ASSET_BASE}uploads/kris-portrait.png`} alt="Kris Lu" style={{ width: "100%", height: "100%", objectFit: "contain", objectPosition: "bottom" }} />
             </div>
           </div>
           <div>
@@ -316,7 +320,7 @@ function Works({ t }) {
         </div>
         <div className="works-grid">
           {t.works.items.map((w, i) => (
-            <a className="work-card" href={`work-${i + 1}.html`} key={i}>
+            <a className="work-card" href={WORK_URLS[i] || WORK_URLS[0]} key={i}>
               <div className="work-thumb">
                 <div className="work-thumb-mock">
                   <WorkPlaceholderArt index={i} />
