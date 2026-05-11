@@ -12,19 +12,20 @@
   'use strict';
 
   // ============ Layer 1: gesture / shortcut blocking ============
+  // Match: <img>, kl-img-wrap (in-page protected images), kl-lightbox-overlay (zoomed view)
+  function isProtectedTarget(t) {
+    if (!t) return false;
+    if (t.tagName === 'IMG') return true;
+    if (!t.closest) return false;
+    return !!(t.closest('.kl-img-wrap') || t.closest('.kl-lightbox-overlay'));
+  }
+
   document.addEventListener('contextmenu', function (e) {
-    var t = e.target;
-    if (!t) return;
-    if (t.tagName === 'IMG' || (t.closest && t.closest('.kl-img-wrap'))) {
-      e.preventDefault();
-    }
+    if (isProtectedTarget(e.target)) e.preventDefault();
   }, { capture: true });
 
   document.addEventListener('dragstart', function (e) {
-    var t = e.target;
-    if (t && (t.tagName === 'IMG' || (t.closest && t.closest('.kl-img-wrap')))) {
-      e.preventDefault();
-    }
+    if (isProtectedTarget(e.target)) e.preventDefault();
   }, { capture: true });
 
   document.addEventListener('keydown', function (e) {

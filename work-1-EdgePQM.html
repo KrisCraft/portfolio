@@ -88,6 +88,22 @@
       border-radius: 999px; padding: 6px 14px;
       font-size: 12px; font-weight: 600; letter-spacing: 0.04em;
     }
+    .case-summary {
+      margin-top: 36px; display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+    @media (max-width: 860px) { .case-summary { grid-template-columns: 1fr; } }
+    .case-summary-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius-xl); padding: 18px 20px;
+    }
+    .case-summary-card .k {
+      font-size: 11px; color: var(--accent); font-weight: 700;
+      letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 8px;
+    }
+    .case-summary-card .v {
+      font-size: 14px; color: var(--foreground); line-height: 1.6; margin: 0;
+    }
     .cs-full-img {
       width: 100%; border-radius: var(--radius-xl);
       border: 1px solid var(--border);
@@ -177,15 +193,14 @@
       background: var(--surface);
       border: 1px solid color-mix(in oklab, var(--foreground) 14%, var(--border));
       border-radius: var(--radius-xl); padding: 18px 20px;
-      display: flex; gap: 18px; align-items: flex-start;
+      display: flex; flex-direction: column; gap: 8px; align-items: flex-start;
     }
     .ia-admin-card .h {
-      flex: 0 0 auto; font-size: 13px; font-weight: 700;
-      letter-spacing: -0.005em; padding-top: 1px;
-      min-width: 110px;
+      font-size: 13px; font-weight: 700;
+      letter-spacing: -0.005em; line-height: 1.45;
     }
     .ia-admin-card .d {
-      flex: 1 1 auto; font-size: 13px; color: var(--muted-foreground);
+      font-size: 13px; color: var(--muted-foreground);
       line-height: 1.55;
     }
   </style>
@@ -213,11 +228,16 @@
           { k: "工具", v: "Figma · Jira · ClaudeCode" }
         ],
         tags: ["UX Design", "Product Owner", "Dashboard", "IIoT"],
+        summary: [
+          { k: "Problem", v: "多個系統散亂的數據源與組織各自定義指標，導致現場無法在同一個可信畫面快速判斷產線狀態。" },
+          { k: "My Impact", v: "重構資訊架構、定義不同的角色看板、指標可溯源與 widget 化機制，並以 PO 身分推動跨組織指標共識。" },
+          { k: "Outcome", v: "完成台灣、中國、泰國跨廠導入，支援 500+ 產線與四語系交付。" }
+        ],
         s1: {
           num: "01",
           title: "背景與挑戰",
-          p1: "Edge PQM 是台達電子智慧製造堆疊的核心應用之一，目標是讓工廠產線在<em>同一個畫面上即時掌握產線狀態</em>——不用在三個系統之間切換，不用等班組長回報，不用憑感覺判斷哪裡出了問題。",
-          p2: "在這個專案裡，我的職責橫跨兩個階段：初期以 <em>UX Designer</em> 的身份重構整個資訊架構與設計系統；後期轉為 <em>Product Owner</em>，負責與多個內部組織對齊指標定義、釐清產品邊界、推動跨廠區導入。",
+          p1: "Edge PQM 是台達電子智慧製造堆疊的核心應用之一，目標是讓工廠產線在<em>同一個系統上即時掌握產線狀態</em>——不用在多個系統之間切換，不用等現場回報，不用憑感覺判斷哪裡出了問題。",
+          p2: "在這個專案裡，我的職責橫跨兩個階段：善用過去 <em>UX Designer</em> 的能力重構整個資訊架構與設計系統；並以 <em>Product Owner</em> 角色，制定產品藍圖，調度開發資源進行產品管理，並負責與多個內部組織對齊指標定義、釐清產品邊界、推動跨廠區導入。",
           challenge_title: "核心挑戰",
           challenge: "資料來自 CFX 設備事件、MES 工單系統、EDMS 設備資訊、SPC 品質模組——等多個資料源、多個組織定義的指標，要統一進一個可配置的看板，還要讓站在螢幕前的用戶幾秒就能讀懂。"
         },
@@ -338,7 +358,7 @@
           num: "05",
           title: "視覺與設計系統",
           p1: "工廠環境的螢幕多樣——戰情室的大型顯示器、工程師桌面的 24 吋螢幕、現場產線上的監控面板，甚至深夜輪班時燈光昏暗的車間。因此我設計了<em>深色 / 淺色雙主題</em>，且在全螢幕狀態將看板所有元素自動放大，以利於實際監控情境，並把所有設計 token 系統化，讓工程團隊能在不同環境下一鍵切換 UI 模式。",
-          p2: "同時支援<em>四語 i18n</em>（繁體中文 / 簡體中文 / English / ไทย），因為台達的工廠遍布亞洲，操作人員的母語各不相同。這套多語系工作流由 <em>AI Agent 全程協作</em>建立——從 i18n key 值的命名規範、翻譯初稿生成，到四個語系的語意一致性審查，全部透過 Agent 自動化完成。",
+          p2: "同時支援<em>四語 i18n</em>（繁體中文 / 簡體中文 / English / ไทย），因為台達的工廠遍布亞洲，操作人員的母語各不相同。我也把 <em>AI Agent</em> 納入交付流程：協助建立 i18n key 命名規範、產出翻譯初稿、檢查四語語意一致性，讓多語系維護不再完全依賴人工逐句比對。",
           p3: "這是我將 <em>AI 工作流落地到真實產品交付</em>的第一個完整實踐——也是我從「會用 AI 工具的設計師」走向「能設計 AI 工作流的產品擁有者」。"
         },
         s5: {
@@ -365,6 +385,11 @@
           { k: "Tools", v: "Figma · Jira · ClaudeCode" }
         ],
         tags: ["UX Design", "Product Owner", "Dashboard", "IIoT"],
+        summary: [
+          { k: "Problem", v: "Multiple data sources and metric owners made production status hard to trust and harder to read in one view." },
+          { k: "My Impact", v: "Restructured the IA, role-based dashboards, metric provenance, and widget model; later drove cross-org metric alignment as Product Owner." },
+          { k: "Outcome", v: "Rolled out across Taiwan, China, and Thailand, supporting 500+ production lines and four-language delivery." }
+        ],
         s1: {
           num: "01",
           title: "Context & Challenge",
@@ -490,7 +515,7 @@
           num: "05",
           title: "Visual & Design System",
           p1: "Factory screens are diverse — large displays in war rooms, 24\" engineer monitors, HMI touchscreens on the floor, and dimly lit night shifts. So I built a <em>light / dark dual theme</em> that auto-enlarges every dashboard element when entering full-screen mode (matching real monitoring scenarios), with the entire design-token system unified so the engineering team can switch UI modes with a single toggle.",
-          p2: "The system supports <em>four languages</em> (Traditional Chinese, Simplified Chinese, English, Thai) — because Delta's factories span Asia and operators work in their native tongue. The entire i18n workflow was built with <em>AI Agent collaboration</em>: key naming conventions, translation drafts, and semantic consistency review across all four locales were automated end-to-end.",
+          p2: "The system supports <em>four languages</em> (Traditional Chinese, Simplified Chinese, English, Thai) because Delta's factories span Asia and operators work in their native tongue. I also brought <em>AI Agent collaboration</em> into delivery: defining i18n key conventions, drafting translations, and checking semantic consistency across all four locales, so multilingual maintenance no longer depended on line-by-line manual review.",
           p3: "This was my first full deployment of an <em>AI-powered workflow in a live product</em> — and the move from 'a designer who uses AI tools' to 'a product owner who designs AI workflows'."
         },
         s5: {
@@ -559,6 +584,14 @@
                   <div className="hero-meta-item" key={i}>
                     <span className="k" style={{ fontSize: 11, letterSpacing: "0.12em", textTransform: "uppercase", color: "var(--muted-foreground)", fontWeight: 600 }}>{m.k}</span>
                     <span className="v" style={{ fontSize: 14, fontWeight: 500, marginTop: 4 }}>{m.v}</span>
+                  </div>
+                ))}
+              </div>
+              <div className="case-summary">
+                {c.summary.map((item, i) => (
+                  <div className="case-summary-card" key={i}>
+                    <div className="k">{item.k}</div>
+                    <p className="v">{item.v}</p>
                   </div>
                 ))}
               </div>

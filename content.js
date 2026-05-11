@@ -16,7 +16,7 @@ window.PORTFOLIO_CONTENT = {
       title_2: "of",
       title_3: "complex",
       title_4: "systems",
-      sub: "我是 Kris，一位以使用者為中心的 Senior UX Designer 與 Product Owner，專注於把工廠車間的複雜流程，翻譯成讓用戶一看就懂、用得順手的數位產品。",
+      sub: "我是 Kris，一位 Senior UX Designer 與 Product Owner，專注於製造業複雜系統、AI / IIoT 產品與跨廠區導入。我把現場流程、資料邏輯與工程限制，翻譯成用戶願意用、團隊能落地的產品。",
       meta: [
         { k: "現職", v: "Senior UX Designer · Product Owner" },
         { k: "公司", v: "台達電子" },
@@ -32,7 +32,7 @@ window.PORTFOLIO_CONTENT = {
       bio_2: "成功將系統導入過多條產線、以跨團隊的大型導入專案，從需求探索、原型驗證到設計系統建置，習慣以實際使用回饋持續迭代。相信好的 UX 既是策略，也是手藝。",
       now: {
         label: "現在進行式",
-        text: "AI 時代下，我把 AI Agent 的能力融入日常設計與產品工作流——從使用者研究、原型驗證到文件協作，持續實驗能讓團隊更高效的方式。技術在進化，設計師也該跟著一起長大。"
+        text: "AI 時代下，我把 AI Agent 融入日常設計與產品工作流——從研究整理、原型驗證、PRD 草稿到多語系語意檢查，讓團隊把更多時間留給判斷、取捨與現場溝通。"
       },
       stats: [
         { n: "7+", l: "年產品設計經驗" },
@@ -98,7 +98,7 @@ window.PORTFOLIO_CONTENT = {
     works: {
       label: "精選作品",
       title: "Selected Works",
-      sub: "三個正在整理中的代表作。每一個都是一段把複雜變簡單的旅程。",
+      sub: "聚焦製造現場、AI 與 IIoT 的產品設計案例，展示我如何把複雜流程轉成可被現場使用、工程交付、組織採納的系統。",
       items: [
         {
           year: "2025 — 2026",
@@ -186,7 +186,7 @@ window.PORTFOLIO_CONTENT = {
       title_2: "of",
       title_3: "complex",
       title_4: "systems",
-      sub: "I'm Kris — a user-centered Senior UX Designer & Product Owner who turns complex shop-floor workflows into intuitive digital products people actually want to use.",
+      sub: "I'm Kris — a Senior UX Designer & Product Owner focused on complex manufacturing systems, AI / IIoT products, and multi-site rollout. I translate shop-floor workflows, data logic, and engineering constraints into products users adopt and teams can ship.",
       meta: [
         { k: "Role", v: "Senior UX Designer · Product Owner" },
         { k: "Company", v: "Delta Electronics" },
@@ -202,7 +202,7 @@ window.PORTFOLIO_CONTENT = {
       bio_2: "I lead cross-functional initiatives across multiple production lines — from discovery and prototyping to building design systems — iterating on real-world feedback to maximize usability and business impact. Good UX is both strategy and craft.",
       now: {
         label: "Currently",
-        text: "In the age of AI, I'm weaving AI Agent capabilities into my daily design and product workflow — from user research and prototyping to documentation. Technology evolves, and designers should grow with it."
+        text: "In the age of AI, I weave AI Agent capabilities into my daily design and product workflow — from research synthesis, prototype review, and PRD drafting to multilingual semantic checks, so the team can spend more energy on judgment, trade-offs, and field alignment."
       },
       stats: [
         { n: "7+", l: "Years of UX experience" },
@@ -268,7 +268,7 @@ window.PORTFOLIO_CONTENT = {
     works: {
       label: "Selected Works",
       title: "Selected Works",
-      sub: "Three featured case studies, currently being written up. Each one is a story of turning complexity into clarity.",
+      sub: "Product design case studies across manufacturing, AI, and IIoT — showing how I turn complex workflows into systems people can use, engineering can ship, and organizations can adopt.",
       items: [
         {
           year: "2025 — 2026",

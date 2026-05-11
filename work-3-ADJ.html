@@ -94,6 +94,23 @@
     .outcome-n { font-size: 36px; font-weight: 800; color: var(--accent); letter-spacing: -0.03em; line-height: 1.1; }
     .outcome-l { font-size: 13px; color: var(--muted-foreground); margin-top: 8px; line-height: 1.4; white-space: pre-line; }
 
+    .case-summary {
+      margin-top: 36px; display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+    @media (max-width: 860px) { .case-summary { grid-template-columns: 1fr; } }
+    .case-summary-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius-xl); padding: 18px 20px;
+    }
+    .case-summary-card .k {
+      font-size: 11px; color: var(--accent); font-weight: 700;
+      letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 8px;
+    }
+    .case-summary-card .v {
+      font-size: 14px; color: var(--foreground); line-height: 1.6; margin: 0;
+    }
+
     .reflection-body p { margin: 0; }
     .reflection-body p + p { margin-top: 18px; }
     .reflection-body em { color: var(--foreground); font-style: normal; font-weight: 600; }
@@ -352,6 +369,11 @@
           { k: "工具", v: "Figma · Jira · Confluence" }
         ],
         tags: ["UX Design", "AI / MLOps", "AOI", "Smart SMT", "Industrial AI"],
+        summary: [
+          { k: "Problem", v: "傳統 ADC 是資料科學家工具，現場工程師被卡在人工清洗、逐張標註與不可重訓的模型流程。" },
+          { k: "My Impact", v: "把 MLOps 拆成可操作模組，設計 Dataset / Batch / Filter、Auto Labeling、RCL-ROI 輔助與模型信任機制。" },
+          { k: "Outcome", v: "AI 約替代一半人工覆判量，保守模型實驗下 0 漏檢，工廠約 30 天可自主啟動 AI 輔助。" }
+        ],
         s1: {
           num: "01",
           title: "背景與挑戰",
@@ -522,7 +544,7 @@
         s_label: {
           num: "05",
           title: "數據標記 — 把標註的痛拆掉",
-          p1: "走訪實際操作 ADC 的人員後發現，最沉重的不是模型，是<em>標註</em>——每天上萬張影像要手動分類、手動畫框、手動審核，DS 與作業員兩端都被卡住。ADJ 在這個模組投入了最多 UX 設計能量，把「每張圖都要手畫」的疲憊，<em>翻譯成「每張圖只要看一眼」的審核工作</em>。",
+          p1: "走訪實際操作 ADC 的人員後發現，最沉重的不是模型，是<em>標註</em>——每天上萬張影像要手動分類、手動畫框、手動審核，DS 與作業員兩端都被卡住。ADJ 在這個模組投入了最多 UX 設計能量：透過 Auto Labeling、RCL-ROI 輔助框與 CFX metadata 導入，把「每張圖都要手畫」的疲憊，<em>翻譯成「看一眼並審核」的工作</em>。",
           caption_l: "Classification 標註 — RC 類元件採 NG / PASS 雙類別，左側清單顯示待標記 / 待審核 / 拒絕通過 / 註釋完成 / 已略過 五狀態",
           caption_r: "Object Detection ROI — IC 類採位置框標註，系統依元件規格自動提示 ROI，使用者只需確認",
           moves_label: "三個關鍵設計",
@@ -590,7 +612,7 @@
             { n: "30", l: "天自主上線\n工廠自主訓練約 1 個月即可啟動 AI 輔助" }
           ],
           reflection_title: "反思",
-          reflection: "<p>ADJ 對我而言最重要的學習，是 UX 在 AI 系統裡扮演的角色——不只是把畫面做漂亮，而是<em>把抽象的機器學習流程，翻譯成現場人員能日常操作的工作軌道</em>。Dataset / Batch / Filter 三層結構看似只是資料管理的小設計，但它本質上是把資料科學家的工作模式，封裝成領域工程師的操作模式。</p><p>另一個刻骨銘心的學習是「標註的痛」。在實際走訪標註人員後才發現，傳統 ADC 系統最沉重的不是模型，而是標註。RCL-ROI 輔助框、Auto Labeling、CFX metadata 直接導入這三個看似不相關的設計決策，本質上都在回答同一個問題——<em>怎麼讓操作員少標一張圖</em>。事後回看，這比任何漂亮的 dashboard 都重要。</p><p>ADJ 也是我第一次在一個系統裡同時面對「演算法團隊」、「製程團隊」、「IT 平台團隊」三方利害關係人。每一方都有自己語言、自己的指標、自己的優先順序。<span style=\"color:var(--accent);font-weight:600\">UX 在這種場域不是介面工作，而是翻譯工作——把不同團隊的世界觀，翻譯成同一個產品能容納的設計語言。</span>這個經驗直接導向我後來轉任 Product Owner 的決定。</p>"
+          reflection: "<p>ADJ 對我而言最重要的學習，是 UX 在 AI 系統裡扮演的角色——不只是把畫面做漂亮，而是<em>把抽象的機器學習流程，翻譯成現場人員能日常操作的工作軌道</em>。Dataset / Batch / Filter 三層結構看似只是資料管理的小設計，但它本質上是把資料科學家的工作模式，封裝成領域工程師的操作模式。</p><p>另一個刻骨銘心的學習是「標註的痛」。在實際走訪標註人員後才發現，傳統 ADC 系統最沉重的不是模型，而是標註。RCL-ROI 輔助框、Auto Labeling、CFX metadata 直接導入這三個看似不相關的設計決策，本質上都在回答同一個問題——<em>怎麼讓操作員少標一張圖</em>。事後回看，這比任何漂亮的 dashboard 都重要。</p><p>ADJ 也是我第一次在一個系統裡同時面對「演算法團隊」、「製程團隊」、「IT 平台團隊」三方利害關係人。每一方都有自己語言、自己的指標、自己的優先順序。<span style=\"color:var(--accent);font-weight:600\">UX 在這種場域不是介面工作，而是翻譯工作——把不同團隊的世界觀，翻譯成同一個產品能容納的設計語言。</span>這個經驗導向我後來轉任 Product Owner 的種子與機會。</p>"
         },
         s6: {
           num: "09",
@@ -624,6 +646,11 @@
           { k: "Tools", v: "Figma · Jira · Confluence" }
         ],
         tags: ["UX Design", "AI / MLOps", "AOI", "Smart SMT", "Industrial AI"],
+        summary: [
+          { k: "Problem", v: "Legacy ADC was a data-scientist tool; shop-floor engineers were stuck with manual data cleaning, image-by-image labeling, and models that could not adapt per line." },
+          { k: "My Impact", v: "Turned MLOps into operable modules, designing Dataset / Batch / Filter, Auto Labeling, RCL-ROI assist, and model-trust controls." },
+          { k: "Outcome", v: "AI took on roughly half of human re-judgement work, reached 0 misses under the conservative model, and enabled factories to self-onboard in about 30 days." }
+        ],
         s1: {
           num: "01",
           title: "Context & Challenge",
@@ -794,7 +821,7 @@
         s_label: {
           num: "05",
           title: "Data Labeling — taking the pain out of annotation",
-          p1: "After sitting next to people who actually run legacy ADC, the heaviest part of the workflow isn't modeling — it's <em>labeling</em>. Tens of thousands of images per day to classify, box, and review by hand, with data scientists and operators stuck on both ends. ADJ pours its largest UX investment here, turning 'draw a box on every image' into <em>'glance and approve'</em>.",
+          p1: "After sitting next to people who actually run legacy ADC, the heaviest part of the workflow isn't modeling — it's <em>labeling</em>. Tens of thousands of images per day had to be classified, boxed, and reviewed by hand, with data scientists and operators stuck on both ends. ADJ pours its largest UX investment here: Auto Labeling, RCL-ROI assistant frames, and CFX metadata ingestion turn 'draw a box on every image' into <em>'glance and approve'</em>.",
           caption_l: "Classification labeling — RC components use NG / PASS classes; the left rail shows five states: Pending / In Review / Rejected / Approved / Skipped",
           caption_r: "Object Detection ROI — IC uses bounding-box labeling, with the system auto-suggesting ROI from component spec — the user only confirms",
           moves_label: "Three Key Design Moves",
@@ -923,6 +950,14 @@
                   <div className="hero-meta-item" key={i}>
                     <span className="k" style={{ fontSize: 11, letterSpacing: "0.12em", textTransform: "uppercase", color: "var(--muted-foreground)", fontWeight: 600 }}>{m.k}</span>
                     <span className="v" style={{ fontSize: 14, fontWeight: 500, marginTop: 4 }}>{m.v}</span>
+                  </div>
+                ))}
+              </div>
+              <div className="case-summary">
+                {c.summary.map((item, i) => (
+                  <div className="case-summary-card" key={i}>
+                    <div className="k">{item.k}</div>
+                    <p className="v">{item.v}</p>
                   </div>
                 ))}
               </div>
