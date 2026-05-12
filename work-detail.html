@@ -16,7 +16,7 @@
 <body>
   <div id="root"></div>
 
-  <script src="content.js"></script>
+  <script src="content.shared.js"></script>
   <script src="image-protection.js"></script>
   <script type="text/babel" src="components/HeroUI.jsx"></script>
   <script type="text/babel" src="components/Sections.jsx"></script>
@@ -38,7 +38,7 @@
       const [lang, setLang] = useState(() => localStorage.getItem("kl-lang") || "zh");
       const [theme, setTheme] = useState(() => localStorage.getItem("kl-theme") || "light");
       const idx = getWorkIndex();
-      const t = window.PORTFOLIO_CONTENT[lang];
+      const t = window.pickLang(window.PORTFOLIO_CONTENT, lang);
       const work = t.works.items[idx] || t.works.items[0];
 
       useEffect(() => {
