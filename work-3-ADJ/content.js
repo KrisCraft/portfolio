@@ -4,10 +4,10 @@
 // Render with `window.pickLang(WORK3_CONTENT, lang)` (helper lives in global content.shared.js).
 
 window.WORK3_CONTENT = {
-  title: { en: "AOI · Auto Defect Judgement", zh: "AOI · Auto Defect Judgement" },
+  title: { en: "ADJ · Auto Defect Judgement", zh: "ADJ · Auto Defect Judgement" },
   tagline: {
     en: "Turning an AI model-training workflow only data scientists could operate — into a defect re-judgement system shop-floor process engineers can actually run",
-    zh: "把資料科學家才能操作的 AI 模型訓練流程，變成現場製程工程師能上手的 AOI 瑕疵覆判系統"
+    zh: "把資料科學家才能操作的 AI 模型訓練流程，變成現場製程工程師能上手的 AOI+AI 瑕疵覆判系統"
   },
 
   tags: ["UX Design", "AI / MLOps", "AOI", "Smart SMT", "Industrial AI"],
@@ -53,6 +53,35 @@ window.WORK3_CONTENT = {
   s1: {
     num: "01",
     title: { en: "Context & Challenge", zh: "背景與挑戰" },
+    // Quick domain primer — three terms that appear repeatedly in Section 01
+    // (AOI / ADC / NDF). Placed between the section heading and the cs-2col
+    // body so readers unfamiliar with optical inspection can get oriented.
+    domain: {
+      label: { en: "Quick domain primer", zh: "讀前速懂｜AOI 領域小詞典" },
+      terms: [
+        {
+          h: { en: "AOI · Automated Optical Inspection", zh: "AOI · 自動光學檢測" },
+          d: {
+            en: "The upstream optical inspection machine that scans every PCB after assembly. AOI flags defects through pattern recognition — accurate enough to catch real problems, but prone to over-kill, so its output usually needs a re-judgement layer.",
+            zh: "SMT 產線上負責掃描每片組裝完 PCB 的光學檢測設備。AOI 用樣式比對抓瑕疵——抓得到真問題，但也容易誤殺，所以輸出結果通常還需要再經一道覆判流程。"
+          }
+        },
+        {
+          h: { en: "ADC · Auto Defect Classification", zh: "ADC · 自動瑕疵分類" },
+          d: {
+            en: "The legacy in-line system that uses ML to auto-classify AOI's defect flags. Effective in principle, but historically a data-scientist tool: each model needs DS-led data cleaning, per-image manual labeling, and a rigid retraining pipeline. ADJ replaces this with a workflow shop-floor engineers can run themselves.",
+            zh: "傳統用 ML 自動分類 AOI 缺陷類型的線上系統。理念上有效，但實務上是「資料科學家專用工具」：每個模型要 DS 主導清洗資料、人工逐張標註、走僵化的重訓流程。ADJ 要把它重新拆解成現場工程師也能自己操作的流程。"
+          }
+        },
+        {
+          h: { en: "NDF · No Defect Found", zh: "NDF · 誤殺（檢無瑕疵）" },
+          d: {
+            en: "An AOI false positive — the machine flags a board as defective, but human re-inspection finds nothing wrong. High NDF rates create massive manual re-judgement cost; reducing them is one of ADJ's core jobs.",
+            zh: "AOI 的誤判——機器判 NG，但人工複檢後其實無瑕疵。NDF 比例一旦偏高，就會造成龐大的人工複檢成本，是 ADJ 要直接砍掉的核心痛點之一。"
+          }
+        }
+      ]
+    },
     p1: {
       en: "ADJ (Auto Defect Judgement) is the AI defect re-judgement system that sits on top of <em>AOI (Automated Optical Inspection)</em> equipment. It ingests AOI images and provides an <em>AOI + AI two-stage re-judgement</em> solution, with self-service model training so inference models can keep iterating to meet the needs of different production lines.",
       zh: "ADJ（Auto Defect Judgement）是 AOI(自動光學檢測) 設備的 AI 自動瑕疵覆判系統。它接收 AOI 自動光學檢測的影像，提供 <em>AOI + AI 二階覆判</em> 解決方案，並支援自主模型訓練，讓推論模型能持續迭代符合不同產品線的需求。"

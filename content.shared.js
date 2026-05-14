@@ -29,6 +29,45 @@
   window.pickLang = pickLang;
 })();
 
+// ── BRAND token ────────────────────────────────────────────────────────────
+// Single source of truth for the current employer's display name.
+// Kept deliberately abstract to avoid surfacing in brand-monitoring tools
+// while still credibly signalling industry tier. Update ALL portfolio
+// mentions by editing this object.
+//
+// Variants (use the one that fits the sentence shape):
+//   .name            — short label, no location (hero meta Company field)
+//   .name_with_city  — for experience cards needing city
+//   .full            — sentence-fragment for narrative ("7 years at <full>")
+//   .short           — follow-up reference inside a paragraph
+//   .possessive      — possessive form ("<possessive> factories span Asia")
+//
+// Usage in any content.js:
+//   v: window.BRAND.name
+//   en: `Seven years at ${window.BRAND.full.en}, ...`
+window.BRAND = {
+  name: {
+    en: "Tier-1 electronics manufacturer",
+    zh: "一線電子製造大廠"
+  },
+  name_with_city: {
+    en: "Tier-1 electronics manufacturer · Tainan",
+    zh: "一線電子製造大廠 · 台南"
+  },
+  full: {
+    en: "a Tier-1 electronics manufacturer in Taiwan",
+    zh: "台灣一線電子製造大廠"
+  },
+  short: {
+    en: "the company",
+    zh: "這家公司"
+  },
+  possessive: {
+    en: "the company's",
+    zh: "這家公司的"
+  }
+};
+
 window.PORTFOLIO_CONTENT = {
   nav: {
     about:      { en: "About",       zh: "關於" },
@@ -59,7 +98,7 @@ window.PORTFOLIO_CONTENT = {
       },
       {
         k: { en: "Company", zh: "公司" },
-        v: { en: "Delta Electronics", zh: "台達電子" }
+        v: window.BRAND.name
       },
       {
         k: { en: "Experience", zh: "經驗" },
@@ -105,15 +144,15 @@ window.PORTFOLIO_CONTENT = {
       zh: "從 UI 到 UX，再到 Product Owner"
     },
     sub: {
-      en: "Seven years at Delta Electronics — a journey from interface craft to product strategy.",
-      zh: "在台達電子的七年，是一段從介面設計、邁向產品策略的成長旅程。"
+      en: `Seven years at ${window.BRAND.full.en} — a journey from interface craft to product strategy.`,
+      zh: `在${window.BRAND.full.zh}的七年，是一段從介面設計、邁向產品策略的成長旅程。`
     },
     items: [
       {
         period:  { en: "2024 — Present", zh: "2024 — 至今" },
         phase:   "Phase 03",
         role:    "Product Owner",
-        company: { en: "Delta Electronics · Tainan", zh: "台達電子 Delta Electronics · 台南" },
+        company: window.BRAND.name_with_city,
         summary: {
           en: "Stepped beyond design to translate first-hand shop-floor knowledge into product strategy and business outcomes.",
           zh: "從設計者跨足產品擁有者，把車間第一手生產知識，翻譯成可落地的產品策略與商業價值。"
@@ -150,7 +189,7 @@ window.PORTFOLIO_CONTENT = {
         period:  "2021 — 2024",
         phase:   "Phase 02",
         role:    "Senior UX Designer",
-        company: { en: "Delta Electronics · Tainan", zh: "台達電子 Delta Electronics · 台南" },
+        company: window.BRAND.name_with_city,
         summary: {
           en: "Expanded from interface to experience — researching the floor, building a scalable design system.",
           zh: "從介面延伸到體驗，深入研究現場流程，建立可規模化的設計系統。"
@@ -187,7 +226,7 @@ window.PORTFOLIO_CONTENT = {
         period:  "2018 — 2021",
         phase:   "Phase 01",
         role:    "Senior UI Designer",
-        company: { en: "Delta Electronics · Tainan", zh: "台達電子 Delta Electronics · 台南" },
+        company: window.BRAND.name_with_city,
         summary: {
           en: "Started in interface design — turning dense factory dashboards into screens operators could actually read.",
           zh: "從介面設計起步，把工廠車間複雜的儀表板，變成清楚易讀的畫面。"
@@ -233,7 +272,7 @@ window.PORTFOLIO_CONTENT = {
     items: [
       {
         year: "2025 — 2026",
-        title: "Edge PQM",
+        title: "Edge PQM · Production / Quality / Machine",
         desc: {
           en: "Translating real-time manufacturing data into a production monitoring platform Line Managers actually use.",
           zh: "把複雜的製造現場數據，翻譯成讓用戶真正能用的生產監控平台。"
@@ -241,23 +280,20 @@ window.PORTFOLIO_CONTENT = {
         tags: ["UX Design", "Product Owner", "Dashboard", "IIoT"]
       },
       {
-        year: "2023",
-        title: {
-          en: "Case 02 · Coming Soon",
-          zh: "作品 02 · 即將揭曉"
-        },
+        year: "2024 — 2025",
+        title: "PVS · Part Verification System",
         desc: {
-          en: "A cross-team product transformation journey.",
-          zh: "跨團隊協作下的產品改造旅程。"
+          en: "Stopping the most expensive mistake on an SMT line — a Web + Mobile error-proofing system that turns 'operator verifies by eye' into a step verified by the system.",
+          zh: "擋下 SMT 線上最貴的那個錯誤——把「作業員肉眼比對料盤」變成由系統驗證的步驟。"
         },
-        tags: ["Product Owner", "Design System"]
+        tags: ["UX Design", "Web + Mobile", "Error-Proofing", "SMT"]
       },
       {
         year: "2023 — 2024",
-        title: "AOI · Auto Defect Judgement",
+        title: "ADJ · Auto Defect Judgement",
         desc: {
           en: "Turning an AI model-training workflow only data scientists could run — into a defect re-judgement system shop-floor engineers can operate themselves.",
-          zh: "把資料科學家才能操作的 AI 模型訓練流程，變成現場製程工程師能上手的瑕疵覆判系統。"
+          zh: "把資料科學家才能操作的 AI 模型訓練流程，變成現場製程工程師能上手的 AOI+AI 瑕疵覆判系統。"
         },
         tags: ["UX Design", "AI / MLOps", "ADC", "AOI"]
       }

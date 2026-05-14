@@ -3,6 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow, noarchive, nosnippet" />
+  <meta name="googlebot" content="noindex, nofollow, noarchive, nosnippet" />
+  <meta name="bingbot" content="noindex, nofollow, noarchive, nosnippet" />
   <title>Kris | Edge PQM</title>
   <link rel="icon" type="image/svg+xml" href="../favicon.svg" />
   <link rel="stylesheet" href="../styles/heroui-tokens.css" />
@@ -204,6 +207,31 @@
       font-size: 13px; color: var(--muted-foreground);
       line-height: 1.55;
     }
+
+    /* ── Quick domain primer (Section 01 — small glossary cards under the heading) ── */
+    .domain-label {
+      font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--muted-foreground); font-weight: 700;
+      margin: 24px 0 14px;
+    }
+    .domain-glossary {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 16px; margin-bottom: 40px;
+    }
+    @media (max-width: 720px) { .domain-glossary { grid-template-columns: 1fr; } }
+    .domain-card {
+      background: var(--tint, var(--muted));
+      border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 16px 18px;
+    }
+    .domain-card .term {
+      font-size: 14px; font-weight: 700; color: var(--accent);
+      letter-spacing: -0.005em; margin-bottom: 6px; line-height: 1.35;
+    }
+    .domain-card .desc {
+      font-size: 13px; line-height: 1.6;
+      color: var(--muted-foreground); margin: 0;
+    }
   </style>
 </head>
 <body>
@@ -290,10 +318,26 @@
           {/* ── 01 背景與挑戰 ── */}
           <section className="cs-section">
             <div className="container" style={{ maxWidth: 1100 }}>
+              <div className="cs-num">{c.s1.num} / {c.s1.title}</div>
+              <h2 className="cs-h2">{c.s1.title}</h2>
+
+              {/* ── Quick domain primer (smart-manufacturing data sources) — driven by c.s1.domain ── */}
+              {c.s1.domain && (
+                <>
+                  <div className="domain-label">{c.s1.domain.label}</div>
+                  <div className="domain-glossary">
+                    {c.s1.domain.terms.map((t, i) => (
+                      <div className="domain-card" key={i}>
+                        <div className="term">{t.h}</div>
+                        <p className="desc">{t.d}</p>
+                      </div>
+                    ))}
+                  </div>
+                </>
+              )}
+
               <div className="cs-2col">
                 <div>
-                  <div className="cs-num">{c.s1.num} / {c.s1.title}</div>
-                  <h2 className="cs-h2">{c.s1.title}</h2>
                   <p className="cs-body" dangerouslySetInnerHTML={{ __html: c.s1.p1 }} />
                   <p className="cs-body" style={{ marginTop: 16 }} dangerouslySetInnerHTML={{ __html: c.s1.p2 }} />
                   <div style={{

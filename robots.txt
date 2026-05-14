@@ -1,0 +1,57 @@
+# Portfolio is intentionally not indexed.
+# Direct URL access is fine; appearing in search engines and brand-monitoring
+# tools is not. Visitors who have the link can still read everything.
+
+User-agent: *
+Disallow: /
+
+# Explicit denials for the biggest crawlers (defense in depth; the wildcard
+# above already covers them, but some scrapers only look at named entries).
+User-agent: Googlebot
+Disallow: /
+
+User-agent: Googlebot-Image
+Disallow: /
+
+User-agent: Bingbot
+Disallow: /
+
+User-agent: DuckDuckBot
+Disallow: /
+
+User-agent: Baiduspider
+Disallow: /
+
+User-agent: YandexBot
+Disallow: /
+
+User-agent: Slurp
+Disallow: /
+
+# AI / scraper bots
+User-agent: GPTBot
+Disallow: /
+
+User-agent: ChatGPT-User
+Disallow: /
+
+User-agent: ClaudeBot
+Disallow: /
+
+User-agent: anthropic-ai
+Disallow: /
+
+User-agent: Google-Extended
+Disallow: /
+
+User-agent: CCBot
+Disallow: /
+
+User-agent: PerplexityBot
+Disallow: /
+
+User-agent: Bytespider
+Disallow: /
+
+User-agent: Amazonbot
+Disallow: /

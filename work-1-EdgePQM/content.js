@@ -70,9 +70,38 @@ window.WORK1_CONTENT = {
   s1: {
     num: "01",
     title: { en: "Context & Challenge", zh: "背景與挑戰" },
+    // Quick domain primer — placed between the section heading and the cs-2col
+    // body so readers unfamiliar with smart-manufacturing data sources can get
+    // oriented before encountering CFX / MES / SPC in body text.
+    domain: {
+      label: { en: "Quick domain primer", zh: "讀前速懂｜智慧製造資料來源" },
+      terms: [
+        {
+          h: { en: "IPC-CFX", zh: "IPC-CFX · 連線工廠交換" },
+          d: {
+            en: "An IPC industry standard for SMT factory equipment communication. CFX-capable machines auto-publish events (recipe load, board in/out, defects, alarms) in a standardized format, so any platform can consume them without vendor-specific adapters.",
+            zh: "IPC（國際電子工業聯接協會）制定的 SMT 工廠設備通訊標準。支援 CFX 的設備會以統一格式自動拋出事件（換配方、進板出板、不良、警報），任何系統都能直接接收，不用為每個設備廠牌再做轉接。"
+          }
+        },
+        {
+          h: { en: "MES", zh: "MES · 製造執行系統" },
+          d: {
+            en: "Manufacturing Execution System — the factory's core system for work orders, production scheduling, lot tracking, and shop-floor data. Edge PQM consumes MES work orders to link production data to the right WO context.",
+            zh: "Manufacturing Execution System，工廠的生產執行核心，管工單、生產排程、批次追蹤、現場數據。Edge PQM 從 MES 取得工單，把採集到的生產數據對應到正確的 WO 上。"
+          }
+        },
+        {
+          h: { en: "SPC", zh: "SPC · 統計製程管制" },
+          d: {
+            en: "Statistical Process Control — a quality methodology that monitors process variation through control charts and KPIs (Cp / Cpk, KPIV / OV) to catch drift before it becomes defects. Edge PQM integrates with SPC to surface quality anomalies on the dashboard.",
+            zh: "Statistical Process Control，用控制圖與 Cp / Cpk、KPIV / OV 等指標監控製程變異，在缺陷產生前就抓到偏移的品質方法。Edge PQM 整合 SPC 模組，把品質異常直接呈現到看板上。"
+          }
+        }
+      ]
+    },
     p1: {
-      en: "Edge PQM (Production Quality Management) is a core application in Delta Electronics' smart manufacturing stack. The goal: let factory Line Managers monitor production status <em>in a single view</em> — no switching between three systems, no waiting for shift reports, no guesswork.",
-      zh: "Edge PQM 是台達電子智慧製造堆疊的核心應用之一，目標是讓工廠產線在<em>同一個系統上即時掌握產線狀態</em>——不用在多個系統之間切換，不用等現場回報，不用憑感覺判斷哪裡出了問題。"
+      en: `Edge PQM (Production Quality Management) is a core application in ${window.BRAND.full.en}'s smart manufacturing stack. The goal: let factory Line Managers monitor production status <em>in a single view</em> — no switching between three systems, no waiting for shift reports, no guesswork.`,
+      zh: `Edge PQM 是${window.BRAND.full.zh}智慧製造堆疊的核心應用之一，目標是讓工廠產線在<em>同一個系統上即時掌握產線狀態</em>——不用在多個系統之間切換，不用等現場回報，不用憑感覺判斷哪裡出了問題。`
     },
     p2: {
       en: "My role spanned two phases: first as <em>UX Designer</em>, restructuring the entire information architecture and design system; then as <em>Product Owner</em>, aligning metric definitions across multiple internal organizations and driving multi-site deployment.",
@@ -310,8 +339,8 @@ window.WORK1_CONTENT = {
       zh: "工廠環境的螢幕多樣——戰情室的大型顯示器、工程師桌面的 24 吋螢幕、現場產線上的監控面板，甚至深夜輪班時燈光昏暗的車間。因此我設計了<em>深色 / 淺色雙主題</em>，且在全螢幕狀態將看板所有元素自動放大，以利於實際監控情境，並把所有設計 token 系統化，讓工程團隊能在不同環境下一鍵切換 UI 模式。"
     },
     p2: {
-      en: "The system supports <em>four languages</em> (Traditional Chinese, Simplified Chinese, English, Thai) because Delta's factories span Asia and operators work in their native tongue. I also brought <em>AI Agent collaboration</em> into delivery: defining i18n key conventions, drafting translations, and checking semantic consistency across all four locales, so multilingual maintenance no longer depended on line-by-line manual review.",
-      zh: "同時支援<em>四語 i18n</em>（繁體中文 / 簡體中文 / English / ไทย），因為台達的工廠遍布亞洲，操作人員的母語各不相同。我也把 <em>AI Agent</em> 納入交付流程：協助建立 i18n key 命名規範、產出翻譯初稿、檢查四語語意一致性，讓多語系維護不再完全依賴人工逐句比對。"
+      en: `The system supports <em>four languages</em> (Traditional Chinese, Simplified Chinese, English, Thai) because ${window.BRAND.possessive.en} factories span Asia and operators work in their native tongue. I also brought <em>AI Agent collaboration</em> into delivery: defining i18n key conventions, drafting translations, and checking semantic consistency across all four locales, so multilingual maintenance no longer depended on line-by-line manual review.`,
+      zh: `同時支援<em>四語 i18n</em>（繁體中文 / 簡體中文 / English / ไทย），因為${window.BRAND.possessive.zh}工廠遍布亞洲，操作人員的母語各不相同。我也把 <em>AI Agent</em> 納入交付流程：協助建立 i18n key 命名規範、產出翻譯初稿、檢查四語語意一致性，讓多語系維護不再完全依賴人工逐句比對。`
     },
     p3: {
       en: "This was my first full deployment of an <em>AI-powered workflow in a live product</em> — and the move from 'a designer who uses AI tools' to 'a product owner who designs AI workflows'.",
@@ -324,8 +353,8 @@ window.WORK1_CONTENT = {
     num: "06",
     title: { en: "Outcome & Reflection", zh: "成果與反思" },
     p1: {
-      en: "Edge PQM scaled to a multi-country rollout across Taiwan, China, and Thailand, becoming a core system in Delta's manufacturing application stack. What it really solved underneath was the challenge of <em>global ramp-up consistency</em>: tuned best-practice parameters and quality logic can be replicated to plants worldwide, dramatically shortening the new-line ramp-up curve. This kind of \"Copy Exact\" production-line replication is, at its core, the <em>softwarization and asset-ization of manufacturing know-how</em>.",
-      zh: "Edge PQM 完成跨國規模化導入，覆蓋台灣、中國、泰國三地廠區，現已成為台達生產製造應用的核心系統之一，背後其實解決的是「全球擴產率一致性」的挑戰。調校好的最佳生產參數與品質邏輯，可以快速複製到世界各廠，大幅縮短新廠的開線爬坡期，這種「產線複製(Copy Exact)」的過程，本質上是 「製造經驗的軟體化與資產化」。"
+      en: `Edge PQM scaled to a multi-country rollout across Taiwan, China, and Thailand, becoming a core system in ${window.BRAND.possessive.en} manufacturing application stack. What it really solved underneath was the challenge of <em>global ramp-up consistency</em>: tuned best-practice parameters and quality logic can be replicated to plants worldwide, dramatically shortening the new-line ramp-up curve. This kind of "Copy Exact" production-line replication is, at its core, the <em>softwarization and asset-ization of manufacturing know-how</em>.`,
+      zh: `Edge PQM 完成跨國規模化導入，覆蓋台灣、中國、泰國三地廠區，現已成為${window.BRAND.possessive.zh}生產製造應用的核心系統之一，背後其實解決的是「全球擴產率一致性」的挑戰。調校好的最佳生產參數與品質邏輯，可以快速複製到世界各廠，大幅縮短新廠的開線爬坡期，這種「產線複製(Copy Exact)」的過程，本質上是 「製造經驗的軟體化與資產化」。`
     },
     outcomes: [
       {
